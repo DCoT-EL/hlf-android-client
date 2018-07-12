@@ -1,7 +1,8 @@
 # hlf-android-client
 
+## Usage
 
-##Usage
+
 </br>
 Clone this repository </br>
 Open a terminal</br>
