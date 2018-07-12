@@ -3,10 +3,9 @@
 ## Usage
 
 
-</br>
 Clone this repository </br>
 Open a terminal</br>
-`cd \hlf-android-client`</br>
+`cd \hlf-android-client` </br>
 Launch the script builJar: `./buildJar.sh`</br>
 This script put the library .jar in </br>
 Copy it to the folder  `\MyApplication\app\libs`</br>
