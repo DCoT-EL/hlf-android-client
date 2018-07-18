@@ -178,11 +178,11 @@ final public class FabricCustodyLedgerClient implements CustodyLedgerClient {
     public ChainOfCustody getAssetDetails(String id) throws HLFClientException {
 
         if (id == null) {
-            throw new HLFClientException(Function.updateDocument.name() + " is in error, No input data!");
+            throw new HLFClientException(Function.getAssetDetails.name() + " is in error, No input data!");
         }
         List<String> args = new ArrayList<>();
         args.add(id);
-        final String payload = doInvokeByJson(Function.updateDocument, args);
+        final String payload = doInvokeByJson(Function.getAssetDetails, args);
         log.debug("Payload retrieved: " + payload);
         final ChainOfCustody chainOfCustody = (ChainOfCustody) JsonConverter.convertFromJson(payload, ChainOfCustody.class, false);
         return  chainOfCustody;
@@ -192,11 +192,11 @@ final public class FabricCustodyLedgerClient implements CustodyLedgerClient {
     public List<ChainOfCustody> getChainOfEvents(String id) throws HLFClientException {
 
         if (id == null) {
-            throw new HLFClientException(Function.updateDocument.name() + " is in error, No input data!");
+            throw new HLFClientException(Function.getChainOfEvents.name() + " is in error, No input data!");
         }
         List<String> args = new ArrayList<>();
         args.add(id);
-        final String payload = doInvokeByJson(Function.updateDocument, args);
+        final String payload = doInvokeByJson(Function.getChainOfEvents, args);
         log.debug("Payload retrieved: " + payload);
         final List<ChainOfCustody> chainOfCustodyList = (List<ChainOfCustody>) JsonConverter.convertFromJson(payload, ChainOfCustody.class, true);
         return chainOfCustodyList;
