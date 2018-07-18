@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
             }
             LedgerClient ledgerClient = new FabricLedgerClient();
 
-            final Button putData = findViewById(R.id.putData);
+            final Button putData = findViewById(R.id.initNewChain);
             putData.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        ledgerClient.putData("0","Lasciate ogne speranza, voi ch'intrate");
+                        //ledgerClient.putData("0","Lasciate ogne speranza, voi ch'intrate");
                     } catch (HLFClientException e) {
                         Log.e(TAG, e.getMessage());
                     }
@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
             });
 
-            final Button getData = findViewById(R.id.getData);
+            final Button getData = findViewById(R.id.initNewChain);
             getData.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        String getDataString = ledgerClient.getData(String.valueOf(0));
+                        //String getDataString = ledgerClient.getData(String.valueOf(0));
                         final TextView textViewgetData = (TextView) findViewById(R.id.textViewGetData);
                         textViewgetData.setText(getDataString);
 
