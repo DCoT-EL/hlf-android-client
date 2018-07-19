@@ -18,7 +18,7 @@ Add this dependencies: <br>
 see this **example** -> [link](https://github.com/ascatox/hlf-android-client/blob/master/MyApplication/app/build.gradle)
 
 ### .jar
-Copy inside the folder  `\MyApplication\app\libs`  this libraries .jar -> [link](https://github.com/ascatox/hlf-android-client/tree/master/MyApplication/app/libs)
+Copy inside the folder  `\MyApplication\app\libs`  these ibraries .jar -> [link](https://github.com/ascatox/hlf-android-client/tree/master/MyApplication/app/libs)
 
 
 ### Crypto-config
