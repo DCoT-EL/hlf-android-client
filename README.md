@@ -15,10 +15,10 @@ Add this dependencies: <br>
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 ```
 
-see this **example** -> [link](https://github.com/ascatox/hlf-android-client/blob/master/MyApplication/app/build.gradle)
+see this [**example**](https://github.com/ascatox/hlf-android-client/blob/master/MyApplication/app/build.gradle)
 
 ### .jar
-Copy inside the folder  `\MyApplication\app\libs`  these libraries .jar -> [link](https://github.com/ascatox/hlf-android-client/tree/master/MyApplication/app/libs)
+Copy inside the folder  `\MyApplication\app\libs`  these [libraries](https://github.com/ascatox/hlf-android-client/tree/master/MyApplication/app/libs)
 
 
 ### Crypto-config
