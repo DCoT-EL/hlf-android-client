@@ -15,7 +15,7 @@ Add this dependencies: <br>
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 ```
 
-see this [**example**](https://github.com/ascatox/hlf-android-client/blob/master/MyApplication/app/build.gradle)
+See this [**example**](https://github.com/ascatox/hlf-android-client/blob/master/MyApplication/app/build.gradle)
 
 ### .jar
 Copy inside the folder  `\MyApplication\app\libs`  these [libraries](https://github.com/ascatox/hlf-android-client/tree/master/MyApplication/app/libs)
@@ -27,7 +27,7 @@ Download the folder `crypto-config` from your HyperLedger Fabric installation. <
 
 `cd MyApplication\data`  and copy the dir `crypto-config` and `config-fabric-network.json` into the device's folder `Download` </br>
 
-You can see an example for `config-fabric-network.json` --> [there](https://github.com/ascatox/hlf-android-client/blob/master/config-fabric-network.json)
+You can see an example for `config-fabric-network.json` --> [here](https://github.com/ascatox/hlf-android-client/blob/master/config-fabric-network.json)
 
 
 
