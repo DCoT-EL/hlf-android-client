@@ -6,8 +6,8 @@
   "cryptoconfigdir": "/storage/emulated/0/Download/crypto-config",
   "tls": false,
   "chaincode": {
-    "path": "analytics-chaincode",
-    "name": "analytics-chaincode",
+    "path": "YOUR CHAINCODE PATH",
+    "name": "YOUR CHAINCODE NAME",
     "version": "1.0",
     "lang": "NODE"
   },
