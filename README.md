@@ -25,9 +25,9 @@ Copy inside the folder  `\MyApplication\app\libs`  these [libraries](https://git
 
 Download the folder `crypto-config` from your HyperLedger Fabric installation. <br>
 
-`cd MyApplication\data`  and copy the dir `crypto-config` and `config-fabric-network.json` into the device's folder `Download` </br>
+Copy your dir `crypto-config` and `config-fabric-network.json` into the device's folder `Download` </br>
 
-You can see an example for `config-fabric-network.json` --> [here](https://github.com/ascatox/hlf-android-client/blob/master/config-fabric-network.json)
+You can find an example of `config-fabric-network.json` --> [here](https://github.com/ascatox/hlf-android-client/blob/master/config-fabric-network.json)
 
 
 
