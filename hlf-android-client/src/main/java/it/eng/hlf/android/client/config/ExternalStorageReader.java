@@ -51,7 +51,7 @@ public class ExternalStorageReader {
     public static File getCertConfigPath(String domainName, String user, String cryptoDir) throws HLFClientException {
         if (!isExternalStorageReadable())
             throw new HLFClientException("External Storage not available!");
-        String usersPath = format("/users/Admin@%s/msp/signcerts/" + user + "@%s-cert.pem", domainName,
+        String usersPath = format("/users/" + user + "@%s/msp/signcerts/" + user + "@%s-cert.pem", domainName,
                 domainName);
         if (Utils.isEmpty(cryptoDir))
             cryptoDir = EXTERNAL_STORAGE_PATH + "crypto-config";
