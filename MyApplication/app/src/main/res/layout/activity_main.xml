@@ -11,34 +11,31 @@
 
 
     <Button
-        android:id="@+id/putData"
+        android:id="@+id/initNewChain"
         android:layout_width="281dp"
         android:layout_height="69dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="100dp"
-        android:text="putData"
+        android:text="initNewChain"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="176dp" />
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="29dp" />
 
     <Button
-        android:id="@+id/getData"
+        android:id="@+id/startTransfer"
         android:layout_width="281dp"
         android:layout_height="69dp"
-        android:text="getData"
-        app:layout_constraintTop_toBottomOf="@+id/putData"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="322dp" />
+        android:text="startTransfer"
+        app:layout_constraintTop_toBottomOf="@+id/initNewChain"
+        tools:layout_editor_absoluteX="37dp"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textViewGetData"
-        android:layout_width="244dp"
-        android:layout_height="82dp"
-        android:text="TextViewGetData"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@+id/getData"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="489dp" />
+    <Button
+        android:id="@+id/commentChain"
+        android:layout_width="270dp"
+        android:layout_height="62dp"
+        android:text="commentChain"
+        app:layout_constraintTop_toBottomOf="@+id/startTransfer"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="167dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
