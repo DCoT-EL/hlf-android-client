@@ -6,9 +6,10 @@
   "cryptoconfigdir": "C:/Users/cbarberini/Desktop/crypto-config",
   "tls": false,
   "chaincode": {
-    "path": "github.com/hyperledger/fabric/examples/chaincode/go/dcot-chaincode",
-    "name": "dcot-chaincode	",
-    "version": "1.5"
+    "path": "chaincode",
+    "name": "assets" ,
+    "version": "1.0",
+    "lang": "GOLANG"
   },
   "organizations": [
     {

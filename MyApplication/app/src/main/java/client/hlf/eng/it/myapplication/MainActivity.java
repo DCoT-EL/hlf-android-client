@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
-
             FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient();
 
             final Button init = findViewById(R.id.initNewChain);
