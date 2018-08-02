@@ -1,9 +1,14 @@
 package it.eng.hlf.android.client.helper;
 
-import it.eng.hlf.android.client.config.*;
-import it.eng.hlf.android.client.exception.HLFClientException;
 import org.hyperledger.fabric.protos.peer.Query;
-import org.hyperledger.fabric.sdk.*;
+import org.hyperledger.fabric.sdk.BlockEvent;
+import org.hyperledger.fabric.sdk.ChaincodeResponse;
+import org.hyperledger.fabric.sdk.Channel;
+import org.hyperledger.fabric.sdk.HFClient;
+import org.hyperledger.fabric.sdk.Peer;
+import org.hyperledger.fabric.sdk.ProposalResponse;
+import org.hyperledger.fabric.sdk.QueryByChaincodeRequest;
+import org.hyperledger.fabric.sdk.TransactionProposalRequest;
 import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
@@ -11,7 +16,19 @@ import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import it.eng.hlf.android.client.config.Chaincode;
+import it.eng.hlf.android.client.config.ConfigManager;
+import it.eng.hlf.android.client.config.Configuration;
+import it.eng.hlf.android.client.config.Organization;
+import it.eng.hlf.android.client.config.UserManager;
+import it.eng.hlf.android.client.exception.HLFClientException;
 
 import static java.lang.String.format;
 
@@ -71,6 +88,7 @@ final public class LedgerInteractionHelper {
     }
 
     public void controlInstalledChaincodeOnPeers(Chaincode chaincode) throws HLFClientException {
+        if (!this.organization.getLoggedUser().isAdmin()) return;
         log.debug("Checking installed chaincode on all peer: %s, at version: %s, on peer: %s", chaincode.getName(), chaincode.getVersion(), channel.getPeers());
         for (Peer peer : channel.getPeers()) {
             try {
@@ -112,6 +130,7 @@ final public class LedgerInteractionHelper {
     }
 
     public void controlInstantiatedChaincodeOnPeers(Chaincode chaincode) throws HLFClientException {
+        if (!this.organization.getLoggedUser().isAdmin()) return;
         log.debug("Checking installed chaincode on all peer: %s, at version: %s, on peer: %s", chaincode.getName(), chaincode.getVersion(), channel.getPeers());
         for (Peer peer : channel.getPeers()) {
             if (!checkInstantiatedChaincode(peer, chaincode)) {

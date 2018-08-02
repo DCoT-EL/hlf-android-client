@@ -15,8 +15,18 @@ public class User implements org.hyperledger.fabric.sdk.User {
     private String affiliation;
     private Enrollment enrollment;
     private String mspId;
+    private String secret;
+
 
     public User() {
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     @Override
@@ -102,4 +112,21 @@ public class User implements org.hyperledger.fabric.sdk.User {
         result = 31 * result + (mspId != null ? mspId.hashCode() : 0);
         return result;
     }
+
+    @JsonIgnore
+    public boolean isAdmin() {
+        if (getRoles().contains("admin")
+                || getRoles().contains("Admin"))
+            return true;
+        return false;
+    }
+
+    @JsonIgnore
+    public boolean isPeer() {
+        if (getRoles().contains("peer")
+                || getRoles().contains("Peer"))
+            return true;
+        return false;
+    }
+
 }

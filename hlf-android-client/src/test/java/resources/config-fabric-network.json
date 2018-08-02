@@ -3,13 +3,12 @@
   "type": "hlfv1.1",
   "channelName": "ledgerchannel",
   "timeout": 5000,
-  "cryptoconfigdir": "C:/Users/cbarberini/Desktop/crypto-config",
+  "cryptoconfigdir": "",
   "tls": false,
   "chaincode": {
-    "path": "chaincode",
-    "name": "assets" ,
-    "version": "1.0",
-    "lang": "GOLANG"
+    "path": "github.com/hyperledger/fabric/examples/chaincode/go/dcot-chaincode",
+    "name": "dcot-chaincode",
+    "version": "3.2"
   },
   "organizations": [
     {
@@ -34,9 +33,10 @@
       ],
       "users": [
         {
-          "name": "Admin",
+          "name": "clod16",
+          "secret":"faredge2018",
           "roles": [
-            "admin"
+            "user"
           ]
         }
       ]

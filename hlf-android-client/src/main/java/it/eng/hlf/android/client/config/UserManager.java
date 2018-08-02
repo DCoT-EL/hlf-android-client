@@ -3,8 +3,11 @@ package it.eng.hlf.android.client.config;
 import it.eng.hlf.android.client.exception.HLFClientException;
 import it.eng.hlf.android.client.helper.ChannelInitializationManager;
 import it.eng.hlf.android.client.utils.Utils;
+
+import org.android.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.io.IOUtils;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
+import org.hyperledger.fabric_ca.sdk.exception.EnrollmentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,14 +59,33 @@ public class UserManager {
         }
     }
 
-
     private void doCompleteUser(User user) throws IOException, NoSuchProviderException, NoSuchAlgorithmException, InvalidKeySpecException, HLFClientException {
         user.setMspId(organization.getMspID());
-        File certConfigPath = ExternalStorageReader.getCertConfigPath(organization.getDomainName(), user.getName(), configuration.getCryptoconfigdir());
-        String certificate = new String(IOUtils.toByteArray(new FileInputStream(certConfigPath)), ConfigManager.UTF_8);
-        File fileSk = Utils.findFileSk(organization.getDomainName(), user.getName(), configuration.getCryptoconfigdir());
-        PrivateKey privateKey = Utils.getPrivateKeyFromBytes(IOUtils.toByteArray(new FileInputStream(fileSk)));
-        user.setEnrollment(new Enrollment(privateKey, certificate));
+        if (user.isAdmin()) {
+            File certConfigPath =ExternalStorageReader.getCertConfigPath(organization.getDomainName(), user.getName(), configuration.getCryptoconfigdir());
+            String certificate = new String(IOUtils.toByteArray(new FileInputStream(certConfigPath)), ConfigManager.UTF_8);
+            File fileSk = Utils.findFileSk(organization.getDomainName(), user.getName(), configuration.getCryptoconfigdir());
+            PrivateKey privateKey = Utils.getPrivateKeyFromBytes(IOUtils.toByteArray(new FileInputStream(fileSk)));
+            user.setEnrollment(new Enrollment(privateKey, certificate));
+        } else {
+            enrollUser(user, organization.getCa());
+        }
+    }
+
+    private void enrollUser(User user, Ca ca) throws HLFClientException {
+        try {
+            if (null == user.getSecret() || "".equals(user.getSecret()) || null == ca) {
+                throw new HLFClientException("Secret for user: " + user.getName() + " not given or error in CA retrieving!!!");
+            }
+            final org.hyperledger.fabric.sdk.Enrollment enrollment = ca.getCaClient().enroll(user.getName(), user.getSecret());
+            if (null == enrollment) {
+                throw new HLFClientException("User: " + user.getName() + " not correctly enrolled or problems enrolling!!!");
+
+            }
+            user.setEnrollment(new Enrollment(enrollment.getKey(), enrollment.getCert()));
+        } catch (EnrollmentException | org.hyperledger.fabric_ca.sdk.exception.InvalidArgumentException e) {
+            throw new HLFClientException(e);
+        }
     }
 
 
