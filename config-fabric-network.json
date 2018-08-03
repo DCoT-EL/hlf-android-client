@@ -35,6 +35,7 @@
       "users": [
         {
           "name": "Admin",
+          "secret":"",
           "roles": [
             "admin"
           ]
