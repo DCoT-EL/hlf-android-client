@@ -51,7 +51,7 @@ public class UserManager {
         try {
             Set<User> users = organization.getUsers();
             for (User user : users) {
-               doCompleteUser(user);
+                doCompleteUser(user);
             }
         } catch (IOException | NoSuchProviderException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             log.error(e.getMessage());
@@ -61,15 +61,16 @@ public class UserManager {
 
     private void doCompleteUser(User user) throws IOException, NoSuchProviderException, NoSuchAlgorithmException, InvalidKeySpecException, HLFClientException {
         user.setMspId(organization.getMspID());
-        if (user.isAdmin()) {
-            File certConfigPath =ExternalStorageReader.getCertConfigPath(organization.getDomainName(), user.getName(), configuration.getCryptoconfigdir());
-            String certificate = new String(IOUtils.toByteArray(new FileInputStream(certConfigPath)), ConfigManager.UTF_8);
-            File fileSk = Utils.findFileSk(organization.getDomainName(), user.getName(), configuration.getCryptoconfigdir());
-            PrivateKey privateKey = Utils.getPrivateKeyFromBytes(IOUtils.toByteArray(new FileInputStream(fileSk)));
-            user.setEnrollment(new Enrollment(privateKey, certificate));
-        } else {
+        // if (user.isAdmin()) {
+        File certConfigPath = ExternalStorageReader.getCertConfigPath(organization.getDomainName(), user, configuration.getCryptoconfigdir());
+        String certificate = new String(IOUtils.toByteArray(new FileInputStream(certConfigPath)), ConfigManager.UTF_8);
+        File fileSk = Utils.findFileSk(organization.getDomainName(), user, configuration.getCryptoconfigdir());
+        PrivateKey privateKey = Utils.getPrivateKeyFromBytes(IOUtils.toByteArray(new FileInputStream(fileSk)));
+        user.setEnrollment(new Enrollment(privateKey, certificate));
+        // }
+        /*else {
             enrollUser(user, organization.getCa());
-        }
+        }*/
     }
 
     private void enrollUser(User user, Ca ca) throws HLFClientException {

@@ -37,6 +37,7 @@ import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 
 import it.eng.hlf.android.client.config.ExternalStorageReader;
+import it.eng.hlf.android.client.config.User;
 import it.eng.hlf.android.client.exception.HLFClientException;
 
 import static java.lang.String.format;
@@ -52,7 +53,7 @@ public class Utils {
         return false;
     }
 
-    public static File findFileSk(String domainName, String user, String cryptoDir) throws HLFClientException {
+    public static File findFileSk(String domainName, User user, String cryptoDir) throws HLFClientException {
         File directory = ExternalStorageReader.getSkConfigPath( domainName, user, cryptoDir);
         File[] matches = directory.listFiles((dir, name) -> name.endsWith("_sk"));
 

@@ -37,18 +37,20 @@ public class ExternalStorageReader {
         return fileInputStream;
     }
 
-    public static File getSkConfigPath(String domainName, String user, String cryptoDir) throws HLFClientException {
+    public static File getSkConfigPath(String domainName, User user, String cryptoDir) throws HLFClientException {
         if (!isExternalStorageReadable())
             throw new HLFClientException("External Storage not available!");
         String usersPath = format("/users/" + user + "@%s/msp/keystore/", domainName);
         if (Utils.isEmpty(cryptoDir))
-            cryptoDir = EXTERNAL_STORAGE_PATH + "crypto-config";
+            cryptoDir = EXTERNAL_STORAGE_PATH + "crypto-users";
         String path = cryptoDir + "/peerOrganizations/" + domainName + usersPath;
+        if (!user.isAdmin())
+            path = cryptoDir + "/" + domainName + "/" + user.getName() + "/keystore/";
         File dir = new File(path);
         return dir;
     }
 
-    public static File getCertConfigPath(String domainName, String user, String cryptoDir) throws HLFClientException {
+    public static File getCertConfigPath(String domainName, User user, String cryptoDir) throws HLFClientException {
         if (!isExternalStorageReadable())
             throw new HLFClientException("External Storage not available!");
         String usersPath = format("/users/" + user + "@%s/msp/signcerts/" + user + "@%s-cert.pem", domainName,
@@ -56,6 +58,8 @@ public class ExternalStorageReader {
         if (Utils.isEmpty(cryptoDir))
             cryptoDir = EXTERNAL_STORAGE_PATH + "crypto-config";
         String path = cryptoDir + "/peerOrganizations/" + domainName + usersPath;
+        if (!user.isAdmin())
+            path = cryptoDir + "/" + domainName + "/" + user.getName() + "/ca-cert.pem";
         File dir = new File(path);
         return dir;
     }
