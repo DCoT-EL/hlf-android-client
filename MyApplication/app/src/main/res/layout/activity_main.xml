@@ -9,33 +9,41 @@
     android:visibility="visible"
     tools:context=".MainActivity">
 
-
     <Button
-        android:id="@+id/initNewChain"
+        android:id="@+id/TestEnd2End"
         android:layout_width="281dp"
         android:layout_height="69dp"
-        android:text="initNewChain"
+        android:text="TestEnd2End"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="29dp" />
 
     <Button
-        android:id="@+id/startTransfer"
+        android:id="@+id/TestGetChainOfEvents1"
         android:layout_width="281dp"
         android:layout_height="69dp"
-        android:text="startTransfer"
-        app:layout_constraintTop_toBottomOf="@+id/initNewChain"
-        tools:layout_editor_absoluteX="37dp"
-        tools:ignore="MissingConstraints" />
+        android:text="GetEvents1"
+        app:layout_constraintTop_toBottomOf="@+id/TestEnd2End"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="37dp" />
 
     <Button
-        android:id="@+id/commentChain"
+        android:id="@+id/TestGetChainOfEvents2"
         android:layout_width="270dp"
         android:layout_height="62dp"
-        android:text="commentChain"
-        app:layout_constraintTop_toBottomOf="@+id/startTransfer"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="167dp"
+        android:text="GetEvents2"
+        app:layout_constraintTop_toBottomOf="@+id/TestGetChainOfEvents1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="43dp" />
+
+    <TextView
+        android:id="@+id/ViewGetEvents2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ViewEvents"
+        app:layout_constraintTop_toBottomOf="@+id/TestGetChainOfEvents2"
+        tools:layout_editor_absoluteX="195dp"
+        tools:layout_editor_absoluteY="496dp"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

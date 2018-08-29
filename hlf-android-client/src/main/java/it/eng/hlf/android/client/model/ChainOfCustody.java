@@ -7,7 +7,7 @@ public class ChainOfCustody {
 
     private String id;
     private String trackingId;
-    private Integer weightOfParcel;
+    private double weightOfParcel;
     private String sortingCenterDestination;
     private String distributionOfficeCode;
     private String distributionZone;
@@ -16,11 +16,12 @@ public class ChainOfCustody {
     private String documentId;
     private String text;
     private String status;
+    private Event event;
 
     public ChainOfCustody() {
     }
 
-    public ChainOfCustody(String status, String id, String trackingId, Integer weightOfParcel, String sortingCenterDestination, String distributionOfficeCode, String distributionZone, String deliveryMan, String codeOwner, String documentId, String text) {
+    public ChainOfCustody(String status, String id, String trackingId, double weightOfParcel, String sortingCenterDestination, String distributionOfficeCode, String distributionZone, String deliveryMan, String codeOwner, String documentId, String text, Event event) {
 
         this.id = id;
         this.trackingId = trackingId;
@@ -33,8 +34,16 @@ public class ChainOfCustody {
         this.documentId = documentId;
         this.text = text;
         this.status = status;
+        this.event = event;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
     public String getStatus() {
         return status;
@@ -68,11 +77,11 @@ public class ChainOfCustody {
         this.trackingId = trackingId;
     }
 
-    public Integer getWeightOfParcel() {
+    public double getWeightOfParcel() {
         return weightOfParcel;
     }
 
-    public void setWeightOfParcel(Integer weightOfParcel) {
+    public void setWeightOfParcel(double weightOfParcel) {
         this.weightOfParcel = weightOfParcel;
     }
 
@@ -129,20 +138,12 @@ public class ChainOfCustody {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChainOfCustody that = (ChainOfCustody) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(trackingId, that.trackingId) &&
-                Objects.equals(weightOfParcel, that.weightOfParcel) &&
-                Objects.equals(sortingCenterDestination, that.sortingCenterDestination) &&
-                Objects.equals(distributionOfficeCode, that.distributionOfficeCode) &&
-                Objects.equals(distributionZone, that.distributionZone) &&
-                Objects.equals(deliveryMan, that.deliveryMan) &&
-                Objects.equals(codeOwner, that.codeOwner) &&
-                Objects.equals(documentId, that.documentId);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, trackingId, weightOfParcel, sortingCenterDestination, distributionOfficeCode, distributionZone, deliveryMan, codeOwner, documentId);
+        return Objects.hash(id);
     }
 }
