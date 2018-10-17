@@ -36,14 +36,25 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="43dp" />
 
+
+
     <TextView
         android:id="@+id/ViewGetEvents2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ViewEvents"
+        android:text="ViewEvents2"
         app:layout_constraintTop_toBottomOf="@+id/TestGetChainOfEvents2"
-        tools:layout_editor_absoluteX="195dp"
-        tools:layout_editor_absoluteY="496dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="195dp" />
+
+    <TextView
+        android:id="@+id/ViewGetEvents1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="ViewEvents1"
+        app:layout_constraintTop_toBottomOf="@+id/TestGetChainOfEvents2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="69dp" />
 
 </android.support.constraint.ConstraintLayout>

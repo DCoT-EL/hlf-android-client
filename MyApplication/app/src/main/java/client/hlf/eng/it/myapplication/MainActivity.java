@@ -35,58 +35,50 @@ public class MainActivity extends AppCompatActivity {
             }
             final FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient();
             final Button TestEnd2End = findViewById(R.id.TestEnd2End);
-            TestEnd2End.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final ChainOfCustody chainOfCustody = new ChainOfCustody();
-                    chainOfCustody.setDocumentId("AHUE2-24CEIHO-33989");
-                    chainOfCustody.setText("FRAGILE");
-                    chainOfCustody.setCodeOwner("shdhru-u4h234-bdcbs3-b4782");
-                    chainOfCustody.setTrackingId("1C1998F051209");
-                    chainOfCustody.setWeightOfParcel(1.3);
-                    chainOfCustody.setDistributionOfficeCode("a1234_u4347");
-                    chainOfCustody.setDistributionZone("Rome");
-                    try {
-                        ChainOfCustody chainOfCustody1 = fabricCustodyLedgerClient.initNewChain(chainOfCustody);
-                        String assetID = chainOfCustody1.getId();
-                        fabricCustodyLedgerClient.commentChain(assetID, "PRIORITY");
-                        fabricCustodyLedgerClient.updateDocument(assetID, "NEW-DOCUMENT-ID");
-                        ChainOfCustody chainOfCustody2 = fabricCustodyLedgerClient.getAssetDetails(assetID);
-                        fabricCustodyLedgerClient.startTransfer(assetID, ENG_OP);
-                        fabricCustodyLedgerClient.completeTransfer(assetID);
-                        fabricCustodyLedgerClient.terminateChain(assetID);
-                        List<ChainOfCustody> custodyLedgerClientList = fabricCustodyLedgerClient.getChainOfEvents(assetID);
+            TestEnd2End.setOnClickListener(v -> {
+                final ChainOfCustody chainOfCustody = new ChainOfCustody();
+                chainOfCustody.setDocumentId("AHUE2-24CEIHO-33989");
+                chainOfCustody.setText("FRAGILE");
+                chainOfCustody.setCodeOwner("shdhru-u4h234-bdcbs3-b4782");
+                chainOfCustody.setTrackingId("1C1998F051209");
+                chainOfCustody.setWeightOfParcel(1.3);
+                chainOfCustody.setDistributionOfficeCode("a1234_u4347");
+                chainOfCustody.setDistributionZone("Rome");
+                try {
+                    ChainOfCustody chainOfCustody1 = fabricCustodyLedgerClient.initNewChain(chainOfCustody);
+                    String assetID = chainOfCustody1.getId();
+                    fabricCustodyLedgerClient.commentChain(assetID, "PRIORITY");
+                    fabricCustodyLedgerClient.updateDocument(assetID, "NEW-DOCUMENT-ID");
+                    ChainOfCustody chainOfCustody2 = fabricCustodyLedgerClient.getAssetDetails(assetID);
+                    fabricCustodyLedgerClient.startTransfer(assetID, ENG_OP);
+                    fabricCustodyLedgerClient.completeTransfer(assetID);
+                    fabricCustodyLedgerClient.terminateChain(assetID);
+                    List<ChainOfCustody> custodyLedgerClientList = fabricCustodyLedgerClient.getChainOfEvents(assetID);
 
-                    } catch (HLFClientException e) {
-                        Log.e(TAG, e.getMessage());
-                    }
+                } catch (HLFClientException e) {
+                    Log.e(TAG, e.getMessage());
                 }
-
             });
 
             final Button TestGetChainOfEvents = findViewById(R.id.TestGetChainOfEvents1);
-            TestGetChainOfEvents.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String assetID;
-                    String text;
+            TestGetChainOfEvents.setOnClickListener(v -> {
+                String assetID;
+                String text;
 
-                    final ChainOfCustody chainOfCustody = new ChainOfCustody();
-                    chainOfCustody.setDocumentId("1234");
-                    try {
-                        ChainOfCustody chainOfCustody1 = fabricCustodyLedgerClient.initNewChain(chainOfCustody);
-                        assetID = chainOfCustody1.getId();
-                        text = "comment chain!!";
-                        fabricCustodyLedgerClient.commentChain(assetID, text);
-                        fabricCustodyLedgerClient.updateDocument(assetID, "doc-3265sgs");
-                        fabricCustodyLedgerClient.startTransfer(assetID, ENG_OP);
-                        fabricCustodyLedgerClient.completeTransfer(assetID);
-                        List<ChainOfCustody> chainOfCustodyList;
-                        chainOfCustodyList = fabricCustodyLedgerClient.getChainOfEvents(assetID);
-                    } catch (HLFClientException e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-
+                final ChainOfCustody chainOfCustody = new ChainOfCustody();
+                chainOfCustody.setDocumentId("1234");
+                try {
+                    ChainOfCustody chainOfCustody1 = fabricCustodyLedgerClient.initNewChain(chainOfCustody);
+                    assetID = chainOfCustody1.getId();
+                    text = "comment chain!!";
+                    fabricCustodyLedgerClient.commentChain(assetID, text);
+                    fabricCustodyLedgerClient.updateDocument(assetID, "doc-3265sgs");
+                    fabricCustodyLedgerClient.startTransfer(assetID, ENG_OP);
+                    fabricCustodyLedgerClient.completeTransfer(assetID);
+                    List<ChainOfCustody> chainOfCustodyList;
+                    chainOfCustodyList = fabricCustodyLedgerClient.getChainOfEvents(assetID);
+                } catch (HLFClientException e) {
+                    Log.e(TAG, e.getMessage());
                 }
 
             });
@@ -113,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         fabricCustodyLedgerClient.updateDocument(assetID, "lastID");
                         List<ChainOfCustody> chainOfCustodyList = new ArrayList<>();
                         chainOfCustodyList = fabricCustodyLedgerClient.getChainOfEvents(assetID);
+                        GetEvents2.setText(chainOfCustodyList.toString());
                     } catch (HLFClientException e) {
                         Log.e(TAG, e.getMessage());
                     }
