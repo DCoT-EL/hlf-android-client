@@ -30,19 +30,19 @@ public class ConfigManager {
     private Configuration configuration;
     private static ConfigManager ourInstance;
 
-    private ConfigManager() {
-        this.configuration = loadConfigurationFromJSONFile();
+    private ConfigManager(File configFabricNetwork) {
+        this.configuration = loadConfigurationFromJSONFile( configFabricNetwork);
     }
 
     public Configuration getConfiguration() {
         return this.configuration;
     }
 
-    public static ConfigManager getInstance() throws HLFClientException, InvalidArgumentException {
+    public static ConfigManager getInstance(File configFabricNetwork) throws HLFClientException, InvalidArgumentException {
         if (ourInstance == null) { //1
             synchronized (ConfigManager.class) {
                 if (ourInstance == null) {  //2
-                    ourInstance = new ConfigManager();
+                    ourInstance = new ConfigManager( configFabricNetwork);
                 }
             }
         }
@@ -50,11 +50,11 @@ public class ConfigManager {
     }
 
 
-    private Configuration loadConfigurationFromJSONFile() {
+    private Configuration loadConfigurationFromJSONFile( File configFabricNetwork) {
         try {
-            InputStream resource = ExternalStorageReader.getConfigurationFile();
+            //InputStream resource = ExternalStorageReader.getConfigurationFile();
             ObjectMapper objectMapper = new ObjectMapper();
-            Configuration configuration = objectMapper.readValue(resource, Configuration.class);
+            Configuration configuration = objectMapper.readValue(configFabricNetwork, Configuration.class);
             //log.debug("Configuration JSON is\n" + resource.getPath());
             return configuration;
         } catch (Exception e) {
@@ -79,6 +79,7 @@ public class ConfigManager {
     private Properties getEndpointProperties(final String type, final String name) {
 
         final String domainName = getDomainName(name);
+
 
         File certTLS = Paths.get(configuration.getCryptoconfigdir() + "/ordererOrganizations".replace("orderer", type), domainName, type + "s",
                 name, "tls/server.crt").toFile();

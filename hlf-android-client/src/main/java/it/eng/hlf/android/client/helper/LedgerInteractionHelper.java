@@ -16,6 +16,7 @@ import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -45,16 +46,18 @@ final public class LedgerInteractionHelper {
     private Organization organization;
     private Configuration configuration;
     private EventHandler eventHandler;
+   // private File cert;
+   // private File keystore;
 
 
     //File sampleStoreFile = new File(System.getProperty("java.io.tmpdir") + "/HFCSampletest.properties"); //FIXME
 
     public LedgerInteractionHelper(ConfigManager configManager, Organization organization) throws HLFClientException {
-        this(configManager, organization, null);
+        this(configManager, organization, null, null,null);
 
     }
 
-    public LedgerInteractionHelper(ConfigManager configManager, Organization organization, String userName) throws HLFClientException {
+    public LedgerInteractionHelper(ConfigManager configManager, Organization organization, String userName, File cert, File keystore) throws HLFClientException {
         try {
             //Create instance of client.
             client = HFClient.createNewInstance();
@@ -63,7 +66,7 @@ final public class LedgerInteractionHelper {
             this.organization = organization;
             this.configuration = configManager.getConfiguration();
             this.userManager = UserManager.getInstance(configuration, organization);
-            this.userManager.completeUsers();
+            this.userManager.completeUsers(cert, keystore);
             setup();
         } catch (Exception e) {
             log.error(e.getMessage());

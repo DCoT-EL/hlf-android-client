@@ -3,6 +3,7 @@ package it.eng.hlf.android.client;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -28,14 +29,14 @@ final public class FabricCustodyLedgerClient implements CustodyLedgerClient {
     private LedgerInteractionHelper ledgerInteractionHelper;
     private ConfigManager configManager;
 
-    public FabricCustodyLedgerClient() throws HLFClientException {
-        doLedgerClient();
+    public FabricCustodyLedgerClient(File configFabricNetwork, File cert, File keystore) throws HLFClientException {
+        doLedgerClient(configFabricNetwork, cert, keystore);
     }
 
 
-    private void doLedgerClient() throws HLFClientException {
+    private void doLedgerClient(File configFabricNetwork, File cert, File keystore) throws HLFClientException {
         try {
-            configManager = ConfigManager.getInstance();
+            configManager = ConfigManager.getInstance(configFabricNetwork);
             Configuration configuration = configManager.getConfiguration();
             if (null == configuration || null == configuration.getOrganizations() || configuration.getOrganizations().isEmpty()) {
                 log.error("Configuration missing!!! Check you config file!!!");
@@ -46,7 +47,7 @@ final public class FabricCustodyLedgerClient implements CustodyLedgerClient {
                 throw new HLFClientException("Organizations missing!!! Check you config file!!!");
             //for (Organization org : organizations) {
             //FIXME multiple Organizations
-            ledgerInteractionHelper = new LedgerInteractionHelper(configManager, organizations.get(0));
+            ledgerInteractionHelper = new LedgerInteractionHelper(configManager, organizations.get(0),null, cert, keystore);
             //}
         } catch (Exception e) {
             log.error(e);

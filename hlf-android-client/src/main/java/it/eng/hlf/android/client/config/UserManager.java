@@ -47,11 +47,11 @@ public class UserManager {
     }
 
 
-    public void completeUsers() throws HLFClientException {
+    public void completeUsers(File cert, File keystore) throws HLFClientException {
         try {
             Set<User> users = organization.getUsers();
             for (User user : users) {
-                doCompleteUser(user);
+                doCompleteUser(user, keystore, cert);
             }
         } catch (IOException | NoSuchProviderException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             log.error(e.getMessage());
@@ -59,13 +59,13 @@ public class UserManager {
         }
     }
 
-    private void doCompleteUser(User user) throws IOException, NoSuchProviderException, NoSuchAlgorithmException, InvalidKeySpecException, HLFClientException {
+    private void doCompleteUser(User user, File cert, File keystore) throws IOException, NoSuchProviderException, NoSuchAlgorithmException, InvalidKeySpecException, HLFClientException {
         user.setMspId(organization.getMspID());
         // if (user.isAdmin()) {
-        File certConfigPath = ExternalStorageReader.getCertConfigPath(organization.getDomainName(), user, configuration.getCryptoconfigdir());
-        String certificate = new String(IOUtils.toByteArray(new FileInputStream(certConfigPath)), ConfigManager.UTF_8);
-        File fileSk = Utils.findFileSk(organization.getDomainName(), user, configuration.getCryptoconfigdir());
-        PrivateKey privateKey = Utils.getPrivateKeyFromBytes(IOUtils.toByteArray(new FileInputStream(fileSk)));
+        //File certConfigPath = ExternalStorageReader.getCertConfigPath(organization.getDomainName(), user, configuration.getCryptoconfigdir());
+        String certificate = new String(IOUtils.toByteArray(new FileInputStream(cert)), ConfigManager.UTF_8);
+        //File fileSk = Utils.findFileSk(organization.getDomainName(), user, configuration.getCryptoconfigdir());
+        PrivateKey privateKey = Utils.getPrivateKeyFromBytes(IOUtils.toByteArray(new FileInputStream(keystore)));
         user.setEnrollment(new Enrollment(privateKey, certificate));
         // }
         /*else {
