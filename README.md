@@ -38,7 +38,7 @@ You can find an example of `config-fabric-network.json` --> [here](https://githu
 ```
 InputStream configFabric = getAssets().open("config-fabric-network.json");
 InputStream cert = getAssets().open("ca-cert.pem");
-InputStream keystore = getAssets().open("keystore");
+InputStream keystore = getAssets().open("b3b52fdd8d991002511c2527e69606c33f147fa9a759621e923e3c458bb7827f_sk");
 final FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient(configFabric, cert, keystore);
  
 ```
