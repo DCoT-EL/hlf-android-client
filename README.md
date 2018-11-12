@@ -2,7 +2,7 @@
 
 ## Usage For APK
 
-### build.grandle 
+### build.gradle 
 
 Add this dependencies: <br>
 
