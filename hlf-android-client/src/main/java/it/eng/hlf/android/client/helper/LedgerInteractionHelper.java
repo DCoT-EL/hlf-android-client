@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -57,7 +58,7 @@ final public class LedgerInteractionHelper {
 
     }
 
-    public LedgerInteractionHelper(ConfigManager configManager, Organization organization, String userName, File cert, File keystore) throws HLFClientException {
+    public LedgerInteractionHelper(ConfigManager configManager, Organization organization, String userName, InputStream cert, InputStream keystore) throws HLFClientException {
         try {
             //Create instance of client.
             client = HFClient.createNewInstance();

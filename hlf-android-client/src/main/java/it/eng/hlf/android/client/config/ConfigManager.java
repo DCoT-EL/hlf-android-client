@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -30,19 +31,19 @@ public class ConfigManager {
     private Configuration configuration;
     private static ConfigManager ourInstance;
 
-    private ConfigManager(File configFabricNetwork) {
-        this.configuration = loadConfigurationFromJSONFile( configFabricNetwork);
+    private ConfigManager(InputStream configFabricNetwork) {
+        this.configuration = loadConfigurationFromJSONFile(configFabricNetwork);
     }
 
     public Configuration getConfiguration() {
         return this.configuration;
     }
 
-    public static ConfigManager getInstance(File configFabricNetwork) throws HLFClientException, InvalidArgumentException {
+    public static ConfigManager getInstance(InputStream configFabricNetwork) throws HLFClientException, InvalidArgumentException {
         if (ourInstance == null) { //1
             synchronized (ConfigManager.class) {
                 if (ourInstance == null) {  //2
-                    ourInstance = new ConfigManager( configFabricNetwork);
+                    ourInstance = new ConfigManager(configFabricNetwork);
                 }
             }
         }
@@ -50,7 +51,7 @@ public class ConfigManager {
     }
 
 
-    private Configuration loadConfigurationFromJSONFile( File configFabricNetwork) {
+    private Configuration loadConfigurationFromJSONFile(InputStream configFabricNetwork) {
         try {
             //InputStream resource = ExternalStorageReader.getConfigurationFile();
             ObjectMapper objectMapper = new ObjectMapper();

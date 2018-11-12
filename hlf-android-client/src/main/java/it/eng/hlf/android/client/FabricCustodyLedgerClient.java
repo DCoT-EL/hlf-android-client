@@ -4,6 +4,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -29,12 +30,12 @@ final public class FabricCustodyLedgerClient implements CustodyLedgerClient {
     private LedgerInteractionHelper ledgerInteractionHelper;
     private ConfigManager configManager;
 
-    public FabricCustodyLedgerClient(File configFabricNetwork, File cert, File keystore) throws HLFClientException {
+    public FabricCustodyLedgerClient(InputStream configFabricNetwork, InputStream cert, InputStream keystore) throws HLFClientException {
         doLedgerClient(configFabricNetwork, cert, keystore);
     }
 
 
-    private void doLedgerClient(File configFabricNetwork, File cert, File keystore) throws HLFClientException {
+    private void doLedgerClient(InputStream configFabricNetwork, InputStream cert, InputStream keystore) throws HLFClientException {
         try {
             configManager = ConfigManager.getInstance(configFabricNetwork);
             Configuration configuration = configManager.getConfiguration();

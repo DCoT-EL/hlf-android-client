@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,21 +24,18 @@ import it.eng.hlf.android.client.model.ChainOfCustody;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private static final String ENG_OP = "06c1b03d-6904-4c01-8d92-ad0c27a1f6c4";
+    private static final String ENG_OP = "5be306cd6363660100cc0bd2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-            int permissionCheck = ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-                //this means permission is granted and you can do read and write
-            } else {
-                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            }
-            final FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient();
+            InputStream configFabric = getAssets().open("config-fabric-network.json");
+            InputStream key = getAssets().open("keystore");
+            InputStream cert = getAssets().open("ca-cert.pem");
+
+            final FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient(configFabric, cert, key);
             final Button TestEnd2End = findViewById(R.id.TestEnd2End);
             TestEnd2End.setOnClickListener(v -> {
                 final ChainOfCustody chainOfCustody = new ChainOfCustody();
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
             });
 
-        } catch (HLFClientException e) {
+        } catch (IOException | HLFClientException e) {
             Log.e(TAG, e.getMessage());
         }
     }
