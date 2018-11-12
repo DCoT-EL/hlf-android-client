@@ -36,10 +36,10 @@ You can find an example of `config-fabric-network.json` --> [here](https://githu
 
 ### Usage
 ```
- InputStream configFabric = getAssets().open("config-fabric-network.json");
- InputStream cert = getAssets().open("ca-cert.pem");
- InputStream keystore = getAssets().open("keystore");
- final FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient(configFabric, cert, keystore);
+InputStream configFabric = getAssets().open("config-fabric-network.json");
+InputStream cert = getAssets().open("ca-cert.pem");
+InputStream keystore = getAssets().open("keystore");
+final FabricCustodyLedgerClient fabricCustodyLedgerClient = new FabricCustodyLedgerClient(configFabric, cert, keystore);
  
 ```
  
